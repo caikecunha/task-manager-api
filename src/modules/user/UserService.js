@@ -1,6 +1,7 @@
 import User from './userModel.js';
 import { PasswordHasher } from '../../shared/utils/PasswordHasher.js';
 import { AppError } from '../../shared/utils/AppError.js';
+import Task from '../../modules/task/taskModel.js';
 
 class UserService {
     async show(idUser) {
@@ -68,6 +69,9 @@ class UserService {
         if (!passwordValid) {
             throw new AppError('Senha inválida.', 403);
         }
+
+        // Deletar todas as tasks do usuário
+        await Task.deleteMany({ userId: idUser });
 
         await user.deleteOne();
     }
