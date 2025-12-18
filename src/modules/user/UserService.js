@@ -2,6 +2,7 @@ import User from './userModel.js';
 import { PasswordHasher } from '../../shared/utils/PasswordHasher.js';
 import { AppError } from '../../shared/utils/AppError.js';
 import Task from '../../modules/task/taskModel.js';
+import { DateFormat } from '../../shared/utils/DateFormat.js';
 
 class UserService {
     async show(idUser) {
@@ -14,7 +15,8 @@ class UserService {
         return {
             id: user._id,
             name: user.name,
-            email: user.email
+            email: user.email,
+            created_at: DateFormat.format(user.createdAt)
         }
     }
 

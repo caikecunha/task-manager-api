@@ -1,5 +1,6 @@
 import Task from './taskModel.js';
 import { AppError } from '../../shared/utils/AppError.js';
+import { DateFormat } from '../../shared/utils/DateFormat.js';
 
 class TaskService {
     async index(idUser) {
@@ -9,7 +10,7 @@ class TaskService {
             id: task._id,
             title: task.title,
             description: task.description,
-            created_at: task.createdAt
+            created_at: DateFormat.format(task.createdAt)
         }));
     }
 
@@ -29,7 +30,7 @@ class TaskService {
             id: task._id,
             title: task.title,
             description: task.description,
-            created_at: task.createdAt
+            created_at: DateFormat.format(task.createdAt)
         };
     }
 
@@ -51,7 +52,8 @@ class TaskService {
         return {
             id: newTask._id,
             title: newTask.title,
-            description: newTask.description
+            description: newTask.description,
+            created_at: DateFormat.format(newTask.createdAt)
         };
     }
 
